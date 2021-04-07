@@ -112,7 +112,7 @@ or for evil, in the superlative degree of comparison only.`
 	fmt.Println(JMT.ParseToAscii(aesDecodedText, true))
 	fmt.Println("")
 
-	// Week1()
+	Week1()
 	Week2()
 
  	return

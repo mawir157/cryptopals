@@ -222,7 +222,7 @@ func Week1() {
 
 	// cryptopals 1-4
 	printDay(4)
-	cipherTexts_4,_ := ReadStrFile("./inputs/1_4.txt")
+	cipherTexts_4,_ := ReadStrFile("./inputs/4.txt")
 	for j, ct := range cipherTexts_4 {
 		bytes_4 := JMT.ParseFromHex(ct, false)
 		for i := 0; i < 256; i++ {
@@ -259,7 +259,7 @@ I go crazy when I hear a cymbal`, false)
 
 	// cryptopals 1-6
 	printDay(6)
-	cipherText_6, _ := ReadStrFile2("./inputs/1_6.txt")
+	cipherText_6, _ := ReadStrFile2("./inputs/6.txt")
 	key_6, plaintext_6 := solveVigenere(cipherText_6)
 	fmt.Println(key_6)
 	fmt.Println(plaintext_6)
@@ -267,7 +267,7 @@ I go crazy when I hear a cymbal`, false)
 
 	// cryptopals 1-7
 	printDay(7)
-	cipherText_7,_ := ReadStrFile2("./inputs/1_7.txt")
+	cipherText_7,_ := ReadStrFile2("./inputs/7.txt")
 	key_7 := JMT.BytesToWords(JMT.ParseFromAscii("YELLOW SUBMARINE", false),
 		                        false)
 	aes_7 := JMT.MakeAES(key_7)
@@ -276,8 +276,8 @@ I go crazy when I hear a cymbal`, false)
 	fmt.Println("")
 
 	// cryptopals 1-8
-	printDay(7)
-	input_8,_ := ReadStrFile("./inputs/1_8.txt")
+	printDay(8)
+	input_8,_ := ReadStrFile("./inputs/8.txt")
 	for _, cTxt := range input_8 {
 		if isECB(cTxt) {
 			fmt.Println(cTxt)
