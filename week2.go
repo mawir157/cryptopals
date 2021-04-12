@@ -214,7 +214,8 @@ func server16(bc JMT.BlockCipher, iv [4]JMT.Word, msg string) []byte {
 }
 
 func decode16(bc JMT.BlockCipher, iv [4]JMT.Word, cipherText []byte) {
-	plainText := JMT.ParseToAscii( JMT.CBCDecrypt(bc, iv, cipherText), true )
+	pText, _ := JMT.CBCDecrypt(bc, iv, cipherText)
+	plainText := JMT.ParseToAscii(pText, true )
 
 	ps := strings.Split(plainText, ";")
 	fmt.Println("")
@@ -228,6 +229,7 @@ func decode16(bc JMT.BlockCipher, iv [4]JMT.Word, cipherText []byte) {
 
 func Week2() {
 	// 2-10
+	printDay(10)
  	key_10 := JMT.BytesToWords(JMT.ParseFromAscii("YELLOW SUBMARINE", false),
 		                        false)
  	aes_10 := JMT.MakeAES(key_10)
@@ -236,10 +238,11 @@ func Week2() {
 
 	cipherText_10, _ := ReadStrFile2("./inputs/10.txt")
 
-	plaintext_10 := JMT.CBCDecrypt(aes_10, iv_10, cipherText_10)
+	plaintext_10, _ := JMT.CBCDecrypt(aes_10, iv_10, cipherText_10)
 	fmt.Println(JMT.ParseToAscii(plaintext_10, false))
 
 	// 2-11
+	printDay(11)
 	for i := 0; i < 100; i++ {
 		key_11 := JMT.RandomBlock(4)
 		aes_11 := JMT.MakeAES(key_11)
@@ -270,6 +273,7 @@ func Week2() {
   }
 
   // cryptopals 2-12
+  printDay(12)
 	key_12 := JMT.RandomBlock(4)
 	aes_12 := JMT.MakeAES(key_12)
 
@@ -278,6 +282,7 @@ func Week2() {
   PaddingAttack(aes_12, secretString, 16)
 
   // cryptopals 13
+  printDay(13)
   key_13 := JMT.RandomBlock(8)
 	aes_13 := JMT.MakeAES(key_13)
 
@@ -288,8 +293,8 @@ func Week2() {
 	cipherText_13 := JMT.ECBEncrypt(aes_13,
 		                              JMT.ParseFromAscii(cookie_13, false))
 
-	plaintext_13_1 := JMT.ParseToAscii(JMT.ECBDecrypt(aes_13, cipherText_13),
-	                                   true)
+	pText,_ := JMT.ECBDecrypt(aes_13, cipherText_13)
+	plaintext_13_1 := JMT.ParseToAscii(pText, true)
 
 	// we want to swap out the last block with the encryption of
 	// admin[0x11]x11 role=adminXXXXXX
@@ -302,13 +307,15 @@ func Week2() {
 
 	dodgyCText := JMT.ECBEncrypt(aes_13, JMT.ParseFromAscii(insert, true))
 	hackedCtext := append(cipherText_13[0:48], dodgyCText[16:32]...)
-	hackedCookie := JMT.ECBDecrypt(aes_13, hackedCtext)
+
+	hackedCookie, _ := JMT.ECBDecrypt(aes_13, hackedCtext)
 
 	fmt.Println(plaintext_13_1)
 	fmt.Println(JMT.ParseToAscii(hackedCookie, true))
 
 
  	// cryptopal 14
+ 	printDay(14)
   key_14 := JMT.RandomBlock(6)
 	aes_14 := JMT.MakeAES(key_14)
 
@@ -325,6 +332,7 @@ func Week2() {
 
 
  	// cryptopal 16
+ 	printDay(16)
   key_16 := JMT.RandomBlock(6)
 	aes_16 := JMT.MakeAES(key_16)
 

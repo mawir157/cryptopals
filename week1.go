@@ -271,7 +271,7 @@ I go crazy when I hear a cymbal`, false)
 	key_7 := JMT.BytesToWords(JMT.ParseFromAscii("YELLOW SUBMARINE", false),
 		                        false)
 	aes_7 := JMT.MakeAES(key_7)
-	aesDecodedText_7 := JMT.ECBDecrypt(aes_7, cipherText_7)
+	aesDecodedText_7, _ := JMT.ECBDecrypt(aes_7, cipherText_7)
 	fmt.Println(JMT.ParseToAscii(aesDecodedText_7, false))
 	fmt.Println("")
 
