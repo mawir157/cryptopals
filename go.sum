@@ -1,1 +1,7 @@
 github.com/jeremywohl/flatten v1.0.1/go.mod h1:4AmD/VxjWcI5SRB0n6szE2A6s2fsNHDLO0nAlMHgfLQ=
+github.com/mawir157/jmtcrypto v0.1.0 h1:jpagWjz3P8k7qIc/n/Jwyx4NAqOH7+QWMYGx0WKTJOE=
+github.com/mawir157/jmtcrypto v0.1.0/go.mod h1:H4dVO+xTR10JHVFRKtOjownE+oHyd5R+O4ZmQi4kmWQ=
+github.com/opencoff/go-mtrand v0.0.0-20180301035351-98f3222d11c1 h1:dgxkpaLbba77fQvdD2p6q3iJYli4xg899Hjs3UAfdek=
+github.com/opencoff/go-mtrand v0.0.0-20180301035351-98f3222d11c1/go.mod h1:245SWGBGgPipISxKvxd1hsafPS+uSQLcR70xPWewmD8=
+github.com/seehuhn/mt19937 v1.0.0 h1:r02DuVkQXfohssWZO8L/TeAlYOah7aNNubEHB/7Vtfs=
+github.com/seehuhn/mt19937 v1.0.0/go.mod h1:RikyXajNu+1Gqxm4hOacc3ckyWRd0usF6IkE3gnEcAM=

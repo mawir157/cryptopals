@@ -9,7 +9,7 @@ import (
 import JMT "github.com/mawir157/jmtcrypto"
 
 func printDay(day int) {
-	fmt.Printf("PART %d\n", day)
+	fmt.Printf("\n----------- PART %d ----------\n", day)
 }
 
 func ReadStrFile(fname string) (strs []string, err error) {
