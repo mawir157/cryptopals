@@ -148,7 +148,7 @@ or for evil, in the superlative degree of comparison only.`
 	fmt.Println("")
 
 	//////////////////////////////////////////////////////////////////////////////
-	blockTitle("Encrypt then MAC w/ AES+EBC")
+	blockTitle("Encrypt then MAC w/ AES+ECB")
 	rand.Read(aes_key)
 	aes = JMT.MakeAES(aes_key)
 	hash := JMT.MakeSHA256()
@@ -166,7 +166,7 @@ or for evil, in the superlative degree of comparison only.`
 	fmt.Println("")
 
 	//////////////////////////////////////////////////////////////////////////////
-	blockTitle("Encrypt-and-MAC w/ AES+EBC")
+	blockTitle("Encrypt-and-MAC w/ AES+ECB")
 	rand.Read(aes_key)
 	aes = JMT.MakeAES(aes_key)
 	aeCipher = JMT.EaMEncrypt(aesPlainText, aes, hash, JMT.ECB, extras)
@@ -180,11 +180,58 @@ or for evil, in the superlative degree of comparison only.`
 	fmt.Println("")
 
 	//////////////////////////////////////////////////////////////////////////////
-	blockTitle("MAC-then-Encrypt w/ AES+EBC")
+	blockTitle("MAC-then-Encrypt w/ AES+ECB")
 	rand.Read(aes_key)
 	aes = JMT.MakeAES(aes_key)
 	aeCipher = JMT.MtEEncrypt(aesPlainText, aes, hash, JMT.ECB, extras)
 	aeDecoded, err = JMT.MtEDecrypt(aeCipher, aes, hash, JMT.ECB, extras)
+
+	if err != nil { 
+		fmt.Println(err)
+	} else {
+		fmt.Println(JMT.ParseToAscii(aeDecoded, true))
+	}
+	fmt.Println("")
+
+	//////////////////////////////////////////////////////////////////////////////
+	blockTitle("Encrypt then MAC w/ Camellia+CBC")
+	rand.Read(aes_key)
+	rand.Read(iv)
+	rand.Read(key2)
+	cam := JMT.MakeCamellia(aes_key)
+	extras["iv"] = iv
+	aeCipher = JMT.EtMEncrypt(aesPlainText, cam, hash, JMT.CBC, key2, extras)
+	aeDecoded, err = JMT.EtMDecrypt(aeCipher, cam, hash, JMT.CBC, key2, extras)
+
+	if err != nil { 
+		fmt.Println(err)
+	} else {
+		fmt.Println(JMT.ParseToAscii(aeDecoded, true))
+	}
+	fmt.Println("")
+
+	//////////////////////////////////////////////////////////////////////////////
+	blockTitle("Encrypt-and-MAC w/ Camellia+CBC")
+	rand.Read(aes_key)
+	cam = JMT.MakeCamellia(aes_key)
+	rand.Read(extras["iv"])
+	aeCipher = JMT.EaMEncrypt(aesPlainText, cam, hash, JMT.CBC, extras)
+	aeDecoded, err = JMT.EaMDecrypt(aeCipher, cam, hash, JMT.CBC, extras)
+
+	if err != nil { 
+		fmt.Println(err)
+	} else {
+		fmt.Println(JMT.ParseToAscii(aeDecoded, true))
+	}
+	fmt.Println("")
+
+	//////////////////////////////////////////////////////////////////////////////
+	blockTitle("MAC-then-Encrypt w/ Camellia+CBC")
+	rand.Read(aes_key)
+	cam = JMT.MakeCamellia(aes_key)
+	rand.Read(extras["iv"])
+	aeCipher = JMT.MtEEncrypt(aesPlainText, cam, hash, JMT.CBC, extras)
+	aeDecoded, err = JMT.MtEDecrypt(aeCipher, cam, hash, JMT.CBC, extras)
 
 	if err != nil { 
 		fmt.Println(err)
